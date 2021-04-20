@@ -1,0 +1,33 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}Wild Series - Série
+{% endblock %}
+
+{% block body %}
+<a href="{{ path('category__index') }}">
+    all category
+</a>
+<section>
+	<div class="container">
+		<div class="row">
+			<div class="col-12 text-center my-5">
+				<h1>Catégorie :{{ category_name.name }}</h1>
+				</div>
+				{% for program in programs %}
+				<div class="col-12 col-md-4">
+					<img class="align-self-start mr-3 img-fluid" src="{{program.poster}}" alt="{{ program.title }} poster">
+					<h2>{{ loop.index }} / {{ program.title }} - Catégorie : {{ program.category.name }}</h2>
+					<p>{{ program.summary }}</p>
+					<a href="{{ path("program_show", { id: program.id }) }}">Voir la fiche</a>
+				</div>
+				{% else %}
+			</div>
+		</div>
+	</section>
+		Aucune série trouvée.
+	{% endfor %}
+	<a href="{{ path('app_index') }}">
+		Retour à l'accueil
+	</a>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Toutes les catégories{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-12 text-center my-5">            
+            <h1 class="h4">Toutes les catégories : </h1>
+         </div>
+            {% for categorie in categories %}
+            <div class="col-12 col-md-3">
+                <h2><a href="{{ path("category_show", { categoryName: categorie.name }) }}">{{ categorie.name }}</a></h2><br>
+            </div>
+            {% else %}
+        </div>
+    </div>
+        Aucune category trouvée.
+    {% endfor %}
+    <a href="{{ path('app_index') }}">Retour à l'accueil</a>
+{% endblock %}
