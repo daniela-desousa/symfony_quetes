@@ -8,6 +8,9 @@ use App\Entity\Episode;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Request;
+use App\Form\ProgramType;
 
 class ProgramController extends AbstractController
 {
@@ -22,6 +25,35 @@ public function index(): Response
         'programs' => $programs,
     ]);
 }
+
+
+ /**
+     * @Route("program/new", name="new")
+     */
+    public function new(Request $request): Response
+    {
+        $program = new Program();
+
+        $form = $this->createForm(ProgramType::class, $program);
+
+        $form->handleRequest($request); 
+
+        if($form->isSubmitted() && $form->isValid()){
+
+            $this->addFlash('notice', 'Your program has been saved !');
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($program);
+            $em->flush();
+
+            return $this->redirectToRoute('program_index');
+        }
+
+        return $this->render('program/new.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 
 /**
      * Getting a program by id
