@@ -18,6 +18,7 @@ class Category
      * @ORM\GeneratedValue
      * @Assert\NotBlank(message="ne me laisse pas tout vide")
      * @ORM\Column(type="integer")
+     * @Assert\Length(max="255", maxMessage="La catégorie saisie {{ value }} est trop longue, elle ne devrait pas dépasser {{ limit }} caractères")
      */
     private $id;
 

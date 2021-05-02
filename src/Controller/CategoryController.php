@@ -32,8 +32,8 @@ public function index(): Response
     /**
      * The controller for the category add form
      * Display the form or deal with it
-     *
-     * @Route("categories/new", name="new")
+     * *
+     * @Route("/categories/new", name="category__new", methods={"GET","POST"})
      */
     public function new(Request $request) : Response
     {
